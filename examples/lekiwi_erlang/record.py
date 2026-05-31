@@ -20,7 +20,7 @@ from pathlib import Path
 from lerobot.common.control_utils import init_keyboard_listener
 from lerobot.datasets import LeRobotDataset
 from lerobot.processor import make_default_processors
-from lerobot.robots.lekiwi import LeKiwiClient, LeKiwiClientConfig
+from lerobot.robots.lekiwi_erlang import LeKiwiErlangClient, LeKiwiErlangClientConfig
 from lerobot.scripts.lerobot_record import record_loop
 from lerobot.teleoperators.keyboard import KeyboardTeleop, KeyboardTeleopConfig
 from lerobot.teleoperators.so_leader import SO101Leader, SO101LeaderConfig
@@ -41,12 +41,12 @@ DATASET_ROOT = "/home/starz/桌面/tidy_up_desk"
 
 def main(resume: bool = False):
     # Create the robot and teleoperator configurations
-    robot_config = LeKiwiClientConfig(remote_ip="172.18.100.100", id="my_lekiwi")
+    robot_config = LeKiwiErlangClientConfig(remote_ip="172.18.100.100", id="my_lekiwi")
     leader_arm_config = SO101LeaderConfig(port="/dev/ttyACM0", id="my_lekiwi_leader")
     keyboard_config = KeyboardTeleopConfig(id="my_laptop_keyboard")
 
     # Initialize the robot and teleoperator
-    robot = LeKiwiClient(robot_config)
+    robot = LeKiwiErlangClient(robot_config)
     leader_arm = SO101Leader(leader_arm_config)
     keyboard = KeyboardTeleop(keyboard_config)
 

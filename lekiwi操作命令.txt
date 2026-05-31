@@ -1,0 +1,38 @@
+查找摄像头：python src/lerobot/scripts/lerobot_find_cameras.py
+查看摄像头支持哪些格式：v4l2-ctl -d /dev/video0 --list-formats-ext
+设置某一路摄像头为480P：v4l2-ctl -d /dev/video0 --set-fmt-video=width=640,height=480,pixelformat=MJPG --set-parm=20
+
+查找USB接口：python src/lerobot/scripts/lerobot_find_port.py
+
+标定主动臂：
+lerobot-calibrate \
+    --teleop.type=so101_leader \
+    --teleop.port=/dev/ttyACM0 \
+    --teleop.id=blue
+
+标定lekiwi上面的机械臂：
+lerobot-calibrate \
+    --robot.type=lekiwi \
+    --robot.port=/dev/ttyACM0 \
+    --robot.id=my_lekiwi
+
+遥操作：
+嵌入式端：
+python -m lerobot.robots.lekiwi.lekiwi_host \
+    --robot.id=my_lekiwi \
+    --robot.port=/dev/ttyACM0 \
+    --host.connection_time_s=1800
+笔记本端：
+python examples/lekiwi/teleoperate.py
+数据采集：
+嵌入式端同样启动host：
+python -m lerobot.robots.lekiwi.lekiwi_host \
+    --robot.id=my_lekiwi \
+    --robot.port=/dev/ttyACM0 \
+    --host.connection_time_s=1800
+笔记本端：
+
+
+主要做出的改动：
+1.加入了RDK系列的BPU推理部分
+2.为了适应RDK X5的低带宽，把摄像头输入部分改成了MJPG格式，而非YUYV格式

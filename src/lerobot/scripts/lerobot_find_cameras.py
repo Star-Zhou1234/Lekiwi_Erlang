@@ -163,6 +163,10 @@ def create_camera_instance(cam_meta: dict[str, Any]) -> dict[str, Any] | None:
         if cam_type == "OpenCV":
             cv_config = OpenCVCameraConfig(
                 index_or_path=cam_id,
+                fps=20,
+                width=640,
+                height=480,
+                fourcc="MJPG",
                 color_mode=ColorMode.RGB,
             )
             instance = OpenCVCamera(cv_config)
@@ -177,7 +181,7 @@ def create_camera_instance(cam_meta: dict[str, Any]) -> dict[str, Any] | None:
             return None
 
         if instance:
-            logger.info(f"Connecting to {cam_type} camera: {cam_id}...")
+            logger.info(f"Connecting to {cam_type} camera: {cam_id} with {cv_config.fps} FPS...")
             instance.connect(warmup=True)
             return {"instance": instance, "meta": cam_meta}
     except Exception as e:

@@ -44,6 +44,11 @@ def make_robot_from_config(config: RobotConfig) -> Robot:
         from .lekiwi import LeKiwi
 
         return LeKiwi(config)
+    #新添加的二郎神lekiwi注册
+    elif config.type == "lekiwi_erlang":
+        from .lekiwi_erlang import LeKiwi_Erlang
+
+        return LeKiwi_Erlang(config)
     elif config.type == "hope_jr_hand":
         from .hope_jr import HopeJrHand
 

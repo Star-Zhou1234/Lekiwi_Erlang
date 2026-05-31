@@ -20,20 +20,23 @@ from lerobot.cameras.opencv import OpenCVCameraConfig
 from ..config import RobotConfig
 
 
-def lekiwi_cameras_config() -> dict[str, CameraConfig]:
+def lekiwi_erlang_cameras_config() -> dict[str, CameraConfig]:
     return {
         "front": OpenCVCameraConfig(
-            index_or_path="/dev/video0", fps=20, width=640, height=480, rotation=Cv2Rotation.ROTATE_180, fourcc="MJPG"
+            index_or_path="/dev/video0", fps=20, width=352, height=288, rotation=Cv2Rotation.ROTATE_180
         ),
         "wrist": OpenCVCameraConfig(
-            index_or_path="/dev/video2", fps=20, width=480, height=640, rotation=Cv2Rotation.ROTATE_90, fourcc="MJPG"
+            index_or_path="/dev/video2", fps=20, width=288, height=352, rotation=Cv2Rotation.ROTATE_90
+        ),
+        "top" : OpenCVCameraConfig(
+            index_or_path="/dev/video4", fps=20, width=352, height=288, rotation=Cv2Rotation.ROTATE_180
         ),
     }
 
 
 @RobotConfig.register_subclass("lekiwi")
 @dataclass
-class LeKiwiConfig(RobotConfig):
+class LeKiwiConfig_Erlang(RobotConfig):
     port: str = "/dev/ttyACM0"  # port to connect to the bus
 
     disable_torque_on_disconnect: bool = True
@@ -43,14 +46,14 @@ class LeKiwiConfig(RobotConfig):
     # names to the max_relative_target value for that motor.
     max_relative_target: float | dict[str, float] | None = None
 
-    cameras: dict[str, CameraConfig] = field(default_factory=lekiwi_cameras_config)
+    cameras: dict[str, CameraConfig] = field(default_factory=lekiwi_erlang_cameras_config)
 
     # Set to `True` for backward compatibility with previous policies/dataset
     use_degrees: bool = True
 
 
 @dataclass
-class LeKiwiHostConfig:
+class LeKiwiErlangHostConfig:
     # Network Configuration
     port_zmq_cmd: int = 5555
     port_zmq_observations: int = 5556
@@ -67,7 +70,7 @@ class LeKiwiHostConfig:
 
 @RobotConfig.register_subclass("lekiwi_client")
 @dataclass
-class LeKiwiClientConfig(RobotConfig):
+class LeKiwiErlangClientConfig(RobotConfig):
     # Network Configuration
     remote_ip: str
     port_zmq_cmd: int = 5555
@@ -90,7 +93,7 @@ class LeKiwiClientConfig(RobotConfig):
         }
     )
 
-    cameras: dict[str, CameraConfig] = field(default_factory=lekiwi_cameras_config)
+    cameras: dict[str, CameraConfig] = field(default_factory=lekiwi_erlang_cameras_config)
 
     polling_timeout_ms: int = 15
     connect_timeout_s: int = 5

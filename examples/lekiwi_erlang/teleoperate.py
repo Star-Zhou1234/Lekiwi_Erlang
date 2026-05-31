@@ -16,7 +16,7 @@
 
 import time
 
-from lerobot.robots.lekiwi import LeKiwiClient, LeKiwiClientConfig
+from lerobot.robots.lekiwi_erlang import LeKiwiErlangClient, LeKiwiErlangClientConfig
 from lerobot.teleoperators.keyboard.teleop_keyboard import KeyboardTeleop, KeyboardTeleopConfig
 from lerobot.teleoperators.so_leader import SO101Leader, SO101LeaderConfig##注意区分SO101和SO100！
 from lerobot.utils.robot_utils import precise_sleep
@@ -27,12 +27,12 @@ FPS = 20
 
 def main():
     # Create the robot and teleoperator configurations
-    robot_config = LeKiwiClientConfig(remote_ip="172.18.100.100", id="my_lekiwi")#这里要换成你的IP和你的lekiwi名字
+    robot_config = LeKiwiErlangClientConfig(remote_ip="172.18.100.100", id="my_lekiwi")#这里要换成你的IP和你的lekiwi名字
     teleop_arm_config = SO101LeaderConfig(port="/dev/ttyACM0", id="my_lekiwi_leader")#这里要换成你的主动臂名字和你的USB接口
     keyboard_config = KeyboardTeleopConfig(id="my_laptop_keyboard")
 
     # Initialize the robot and teleoperator
-    robot = LeKiwiClient(robot_config)
+    robot = LeKiwiErlangClient(robot_config)
     leader_arm = SO101Leader(teleop_arm_config)#注意区分SO101和SO100！
     keyboard = KeyboardTeleop(keyboard_config)
 

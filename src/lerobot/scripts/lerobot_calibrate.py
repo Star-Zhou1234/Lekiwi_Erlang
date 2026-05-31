@@ -43,6 +43,7 @@ from lerobot.robots import (  # noqa: F401
     hope_jr,
     koch_follower,
     lekiwi,
+    lekiwi_erlang,#新加的二郎神lekiwi遥操作入口
     make_robot_from_config,
     omx_follower,
     openarm_follower,

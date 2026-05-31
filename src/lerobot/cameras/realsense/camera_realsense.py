@@ -220,6 +220,9 @@ class RealSenseCamera(Camera):
             ImportError: If pyrealsense2 is not installed.
         """
         found_cameras_info = []
+        if 'rs' not in globals() or rs is None:
+            raise ImportError("pyrealsense2 is not installed or failed to import.")
+            
         context = rs.context()
         devices = context.query_devices()
 
