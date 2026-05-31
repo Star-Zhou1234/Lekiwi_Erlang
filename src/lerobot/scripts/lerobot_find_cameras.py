@@ -164,8 +164,8 @@ def create_camera_instance(cam_meta: dict[str, Any]) -> dict[str, Any] | None:
             cv_config = OpenCVCameraConfig(
                 index_or_path=cam_id,
                 fps=20,
-                width=640,
-                height=480,
+                width=352,
+                height=288,
                 fourcc="MJPG",
                 color_mode=ColorMode.RGB,
             )
