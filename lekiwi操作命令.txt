@@ -31,8 +31,28 @@ python -m lerobot.robots.lekiwi.lekiwi_host \
     --robot.port=/dev/ttyACM0 \
     --host.connection_time_s=1800
 笔记本端：
+python examples/lekiwi/record.py
+
+Erlang版本：
+嵌入式端：
+python -m lerobot.robots.lekiwi_erlang.lekiwi_host_erlang\
+    --robot.id=my_lekiwi \
+    --robot.port=/dev/ttyACM0 \
+    --host.connection_time_s=1800
+
+笔记本端：
+python examples/lekiwi_erlang/teleoperate.py
+数据采集：
+嵌入式端同样启动host：
+python -m lerobot.robots.lekiwi_erlang.lekiwi_host_erlang\
+    --robot.id=my_lekiwi \
+    --robot.port=/dev/ttyACM0 \
+    --host.connection_time_s=1800
+笔记本端：
+python examples/lekiwi_erlang/record.py
 
 
 主要做出的改动：
 1.加入了RDK系列的BPU推理部分
 2.为了适应RDK X5的低带宽，把摄像头输入部分改成了MJPG格式，而非YUYV格式
+3.增加三摄像头的版本（front, wrist, top）的遥操作、数据采集部分，在目录examples/lekiwi_erlang和src/lerobot/robots/lekiwi_erlang下

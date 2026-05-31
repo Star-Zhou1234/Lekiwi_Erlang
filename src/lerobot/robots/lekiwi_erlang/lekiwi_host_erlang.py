@@ -25,7 +25,7 @@ import draccus
 import zmq
 
 from .config_lekiwi_erlang import LeKiwiConfig_Erlang, LeKiwiErlangHostConfig
-from .lekiwi_erlang import LeKiwi
+from .lekiwi_erlang import LeKiwi_Erlang
 
 
 @dataclass
@@ -59,10 +59,10 @@ class LeKiwiErlangHost:
 
 @draccus.wrap()
 def main(cfg: LeKiwiErlangServerConfig):
-    logging.info("Configuring LeKiwi")
-    robot = LeKiwi(cfg.robot)
+    logging.info("Configuring LeKiwi_Erlang")
+    robot = LeKiwi_Erlang(cfg.robot)
 
-    logging.info("Connecting LeKiwi")
+    logging.info("Connecting LeKiwi_Erlang")
     robot.connect()
 
     logging.info("Starting HostAgent")

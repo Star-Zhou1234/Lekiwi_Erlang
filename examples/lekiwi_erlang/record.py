@@ -29,14 +29,14 @@ from lerobot.utils.feature_utils import hw_to_dataset_features
 from lerobot.utils.utils import log_say
 from lerobot.utils.visualization_utils import init_rerun
 
-NUM_EPISODES = 15
+NUM_EPISODES = 80
 FPS = 20
 EPISODE_TIME_SEC = 60
 RESET_TIME_SEC = 60
 TASK_DESCRIPTION = "pick up the charger then pick up the wire into the box"
 HF_REPO_ID = "<hf_username>/<dataset_repo_id>"
 DATASET_REPO_ID = "local/my_dataset"
-DATASET_ROOT = "/home/starz/桌面/tidy_up_desk"
+DATASET_ROOT = "/home/starz/桌面/tidy_up_desk_Erlang"
 
 
 def main(resume: bool = False):

@@ -23,13 +23,13 @@ from ..config import RobotConfig
 def lekiwi_erlang_cameras_config() -> dict[str, CameraConfig]:
     return {
         "front": OpenCVCameraConfig(
-            index_or_path="/dev/video0", fps=20, width=352, height=288, rotation=Cv2Rotation.ROTATE_180
+            index_or_path="/dev/video0", fps=20, width=352, height=288, rotation=Cv2Rotation.ROTATE_180, fourcc="MJPG"
         ),
         "wrist": OpenCVCameraConfig(
-            index_or_path="/dev/video2", fps=20, width=288, height=352, rotation=Cv2Rotation.ROTATE_90
+            index_or_path="/dev/video2", fps=20, width=288, height=352, rotation=Cv2Rotation.ROTATE_90, fourcc="MJPG"
         ),
         "top" : OpenCVCameraConfig(
-            index_or_path="/dev/video4", fps=20, width=352, height=288, rotation=Cv2Rotation.ROTATE_180
+            index_or_path="/dev/video4", fps=20, width=352, height=288, rotation=Cv2Rotation.ROTATE_180, fourcc="MJPG"
         ),
     }
 
